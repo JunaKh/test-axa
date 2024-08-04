@@ -20,8 +20,15 @@ my-new-app/
 ├── node_modules/
 ├── public/
 ├── server/
+│   ├── controllers/
+│   │   ├── requestController.js
+│   │   └── ...
 │   ├── services/
 │   │   ├── dataService.js
+│   │   ├── emailService.js
+│   │   └── ...
+│   ├── utils/
+│   │   ├── validationUtils.js
 │   │   └── ...
 │   ├── server.js
 │   ├── package.json
@@ -116,9 +123,21 @@ The Santa App uses a client-server architecture to separate concerns and improve
 - **Client-Side**: Built with React, the client-side provides an interactive interface for users to enter their details and wishes. It handles form validation and displays appropriate success or error messages based on the server response.
 - **Server-Side**: Built with Express.js, the server-side handles user validation by fetching data from external JSON files. It ensures that only valid users can submit their wishes and enforces age restrictions.
 
+### Server-Side Components
+
+1. **Controllers**:
+    - `requestController.js`: Handles the form submission and validation logic. It coordinates with the services to validate user data and send responses back to the client.
+
+2. **Services**:
+    - `dataService.js`: Fetches user data and profiles from external JSON files.
+    - `emailService.js`: Manages the email sending logic, including adding pending requests and sending emails at regular intervals.
+
+3. **Utilities**:
+    - `validationUtils.js`: Contains helper functions for validation, such as calculating age and validating date formats.
+
 ### Data Validation
 
-The server-side validation logic is implemented in `server.js` using the `validateUserData` function, which performs the following checks:
+The server-side validation logic is implemented in `requestController.js` using the `validateUserData` function from `dataService.js`, which performs the following checks:
 
 1. **User Existence**: The function checks if the user ID exists in the `users.json` dataset.
 2. **Profile Existence**: It then verifies if the user profile exists in the `userProfiles.json` dataset.
@@ -160,6 +179,10 @@ The validation logic ensures that only valid users can submit their wishes. By w
 
 Initially, I considered using a separate repository for the client and server parts of the application. However, this approach proved to be time-consuming and complex for the scope of this project. Instead, I decided to build upon the project provided for the test assignment and enhance both the client and server components within a single repository. This approach allowed for easier management and faster development, while still maintaining a clear separation between the client and server codebases.
 
+### Email Sending and Tests
+
+I wrote the logic for sending emails and included tests for this functionality. However, since the email sending requires my personal credentials, I decided not to include these in the code for security reasons. Instead, I have left placeholders and explanations on how to set this up for demonstration purposes.
+
 ## Contributing
 
 1. Fork the repository.
@@ -167,3 +190,6 @@ Initially, I considered using a separate repository for the client and server pa
 3. Make your changes and commit them (`git commit -m 'Add some feature'`).
 4. Push to the branch (`git push origin feature-branch`).
 5. Create a new Pull Request.
+```
+
+Этот README файл включает обновленную архитектуру проекта с добавлением контроллеров и утилит. Если потребуется дополнительная информация или изменения, пожалуйста, дайте знать.
